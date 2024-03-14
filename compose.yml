@@ -1,0 +1,26 @@
+services:
+  api:
+    # TODO clone後は適切なコンテナ名に変える
+    container_name: template-api
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 18080:8080
+    environment:
+      ENV_NAME: local
+      # TODO clone後は適切なデータベースURLに変える
+      DATABASE_URL: postgresql://db-template-user:password@template-database:5432/db-template?sslmode=disable
+
+
+  db:
+    image: postgres:15.3
+    # TODO clone後は適切なコンテナ名に変える
+    container_name: template-database
+    ports:
+      - 5432:5432
+    environment:
+      TZ: "Asia/Tokyo"
+      # TODO clone後は適切なユーザ情報に変える
+      POSTGRES_USER: db-template-user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db-template
