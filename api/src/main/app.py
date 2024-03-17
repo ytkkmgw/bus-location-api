@@ -17,6 +17,7 @@ app = FastAPI(
     redoc_url=redoc_path(),
 )
 
+
 # 422エラーは返さない為、docsから422エラーを削除する。
 def custom_openapi():
     if not app.openapi_schema:

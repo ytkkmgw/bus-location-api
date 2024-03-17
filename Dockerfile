@@ -9,7 +9,8 @@ ENV ENV_NAME="prod"
 ENV PYTHONPATH="/code/api/src/main:/code/database/src/main:$PYTHONPATH"
 
 COPY api/ /code/api
-COPY database/ /code/database
+# TODO DB使用は想定しないため、databaseモジュールはコピー対象外(必要になればいれる)
+#COPY database/ /code/database
 
 WORKDIR /code/api/src/main
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
