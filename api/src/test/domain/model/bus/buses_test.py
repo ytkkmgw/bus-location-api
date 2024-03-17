@@ -1,6 +1,5 @@
 """バス便一覧テストケース"""
 import pytest
-
 from api.src.test.domain.model.busstop.busstop_factory import BusstopFactory
 from api.src.test.domain.model.busstop.busstops_factory import BusstopsFactory
 from domain.model.bus.bus import Bus
@@ -15,33 +14,33 @@ buses: Buses = Buses(
     [
         Bus(
             BusIdentifier("odpt.Bus:SeibuBus.Yoshi60.52001.1.670"),
-            DepartureTime("16:57"),
+            DepartureTime("17:30"),
             BusstopFactory.create("東京女子大", 2),
-            BusstopFactory.empty_create(),
+            BusstopFactory.create_empty(),
         ),
         Bus(
             BusIdentifier("odpt.Bus:SeibuBus.Yoshi60.52001.1.670"),
-            DepartureTime("16:57"),
+            DepartureTime("17:15"),
             BusstopFactory.create("武蔵野第四小学校", 3),
             BusstopFactory.create("立野町", 4),
         ),
         Bus(
             BusIdentifier("odpt.Bus:SeibuBus.Yoshi60.52001.1.670"),
-            DepartureTime("16:56"),
+            DepartureTime("17:00"),
             BusstopFactory.create("関町南二丁目", 6),
-            BusstopFactory.empty_create(),
+            BusstopFactory.create_empty(),
         ),
         Bus(
             BusIdentifier("odpt.Bus:SeibuBus.Yoshi60.52001.1.670"),
-            DepartureTime("16:55"),
+            DepartureTime("16:45"),
             BusstopFactory.create("関町南二丁目", 6),
             BusstopFactory.create("東京三育小学校入口", 7),
         ),
         Bus(
             BusIdentifier("odpt.Bus:SeibuBus.Yoshi60.52001.1.669"),
-            DepartureTime("16:50"),
+            DepartureTime("16:30"),
             BusstopFactory.create("東京三育小学校入口", 7),
-            BusstopFactory.empty_create(),
+            BusstopFactory.create_empty(),
         ),
     ]
 )

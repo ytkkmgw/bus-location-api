@@ -9,5 +9,5 @@ class BusstopFactory:
         return Busstop(BusstopName(busstop_name), BusstopNumber(busstop_number))
 
     @staticmethod
-    def empty_create():
+    def create_empty():
         return Busstop.create_empty()
