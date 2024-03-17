@@ -24,41 +24,44 @@ class NowLocation(Enum):
     FIVE = "5つ前"
     FIVE_BEFORE = "5つ前にも未到着"
 
+    @staticmethod
     def get_location(
-        self, base_busstop: Busstop, buses: Buses, busstops: Busstops
+        base_busstop: Busstop, buses: Buses, busstops: Busstops
     ) -> NowLocation:
         resent_arrive_bus: Bus = buses.recent_bus(base_busstop, busstops)
         if resent_arrive_bus is None:
-            return self.NONE
-
-        subtract_number: int = base_busstop.from_busstop.number_subtract(
-            resent_arrive_bus
+            return NowLocation.NONE
+        subtract_number: int = base_busstop.number_subtract(
+            resent_arrive_bus.from_busstop
         )
+
         if resent_arrive_bus.is_停車中():
             match subtract_number:
                 case 0:
-                    return self.NOW
+                    return NowLocation.NOW
                 case 1:
-                    return self.ONE
+                    return NowLocation.ONE
                 case 2:
-                    return self.TWO
+                    return NowLocation.TWO
                 case 3:
-                    return self.ONE
+                    return NowLocation.ONE
                 case 4:
-                    return self.FOUR
+                    return NowLocation.FOUR
                 case 5:
-                    return self.FIVE
+                    return NowLocation.FIVE
                 case _:
-                    return self.FIVE_BEFORE
+                    return NowLocation.FIVE_BEFORE
 
         match subtract_number:
             case 1:
-                return self.ONE_TWO
+                return NowLocation.SOON
             case 2:
-                return self.TWO_THREE
+                return NowLocation.ONE_TWO
             case 3:
-                return self.THREE_FOUR
+                return NowLocation.TWO_THREE
             case 4:
-                return self.FOUR_FIVE
+                return NowLocation.THREE_FOUR
+            case 5:
+                return NowLocation.FOUR_FIVE
             case _:
-                return self.FIVE_BEFORE
+                return NowLocation.FIVE_BEFORE
