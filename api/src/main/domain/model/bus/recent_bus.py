@@ -4,7 +4,7 @@ from domain.model.bus.bus import Bus
 from domain.model.bus.now_location import NowLocation
 
 
-class ResentBus(BaseModel):
+class RecentBus(BaseModel):
     """直近で到着するバス便"""
 
     bus: Bus
