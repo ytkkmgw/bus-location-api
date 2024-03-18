@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 from domain.model.bus.bus import Bus
 from domain.model.busstop.busstop import Busstop
-from domain.model.busstop.busstops import Busstops
 
 
 class Buses(BaseModel):
@@ -25,7 +24,7 @@ class Buses(BaseModel):
         new_list.reverse()
         return Buses(new_list)
 
-    def recent_bus(self, base_busstop: Busstop, busstops: Busstops) -> Bus | None:
+    def recent_bus(self, base_busstop: Busstop) -> Bus | None:
         # 始発停留所(index=0)の場合は位置情報が無い
         # busesの要素が空の場合(本日の運行が終了している)は位置情報が無い
         if self.is_empty() or base_busstop.number.is_first_departure():

@@ -2,9 +2,7 @@ from __future__ import annotations
 from enum import Enum
 
 from domain.model.bus.bus import Bus
-from domain.model.bus.buses import Buses
 from domain.model.busstop.busstop import Busstop
-from domain.model.busstop.busstops import Busstops
 
 
 class NowLocation(Enum):
@@ -25,17 +23,12 @@ class NowLocation(Enum):
     FIVE_BEFORE = "5つ前にも未到着"
 
     @staticmethod
-    def get_location(
-        base_busstop: Busstop, buses: Buses, busstops: Busstops
-    ) -> NowLocation:
-        resent_arrive_bus: Bus = buses.recent_bus(base_busstop, busstops)
-        if resent_arrive_bus is None:
+    def get_location(recent_bus: Bus, base_busstop: Busstop) -> NowLocation:
+        if recent_bus is None:
             return NowLocation.NONE
-        subtract_number: int = base_busstop.number_subtract(
-            resent_arrive_bus.from_busstop
-        )
+        subtract_number: int = base_busstop.number_subtract(recent_bus.from_busstop)
 
-        if resent_arrive_bus.is_停車中():
+        if recent_bus.is_停車中():
             match subtract_number:
                 case 0:
                     return NowLocation.NOW

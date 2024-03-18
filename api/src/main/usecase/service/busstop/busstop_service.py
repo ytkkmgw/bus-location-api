@@ -1,6 +1,7 @@
 from fastapi.params import Depends
 
 from config.di.inject import inject
+from domain.model.busstop.busstops import Busstops
 from domain.model.route.route_identifier import RouteIdentifier
 from usecase.repository.busstop.busstop_repository import BusstopRepository
 
@@ -11,5 +12,5 @@ class BusstopService:
     ):
         self.busstop_repository = busstop_repository
 
-    def list_all(self, route_indentifier: RouteIdentifier):
+    def list_all(self, route_indentifier: RouteIdentifier) -> Busstops:
         return self.busstop_repository.list_all(route_indentifier)
