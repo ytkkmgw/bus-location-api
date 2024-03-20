@@ -8,7 +8,6 @@ from alembic import context
 from base import Base
 
 # ここにmigration対象のクラスをimportする
-from schema.sample_shema import *
 
 
 # this is the Alembic Config object, which provides

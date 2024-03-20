@@ -1,7 +1,6 @@
 from domain.policy.unsupported_operation_error import UnsupportedOperationError
 
 # injectする際にimportが必要な為、グレーアウトしているがimportは残している。
-from infrastructure.datasource.sample.sample_datasource import *
 from infrastructure.datasource.pole.pole_datasource import *
 from infrastructure.datasource.route.route_datasource import *
 from infrastructure.datasource.bus.bus_datasource import *

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_serializer
 
 
 class BusstopName(BaseModel):
@@ -16,3 +16,7 @@ class BusstopName(BaseModel):
 
     def __eq__(self, other):
         return self.value == other.value
+
+    @model_serializer
+    def __str__(self) -> str:
+        return self.value

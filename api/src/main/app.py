@@ -4,7 +4,6 @@ from fastapi.openapi.utils import get_openapi
 from config.openapi.doc_path import docs_path, redoc_path
 from endpoint.bus import bus_controller
 from endpoint.exception_handlers import exception_handlers
-from endpoint.sample import sample_controller
 
 
 app = FastAPI(
@@ -48,5 +47,4 @@ app.openapi = custom_openapi
 exception_handlers(app)
 
 # 以下にcontrollerのrouterを定義する
-app.include_router(sample_controller.router)
 app.include_router(bus_controller.router)
