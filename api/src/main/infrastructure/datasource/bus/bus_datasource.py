@@ -26,7 +26,6 @@ class BusDataSource(BusRepository):
 
         buses: list[Bus] = []
         for response in responses:
-            print(response)
             bus_identifier: BusIdentifier = BusIdentifier(response["odpt:busTimetable"])
             # TODO なぜかtimetableがnullになるレコードがある。原因不明だが、一旦はリストから外す。
             if bus_identifier is None:
