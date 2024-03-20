@@ -35,3 +35,12 @@ class Bus(BaseModel):
         if self.to_busstop.is_停車中():
             return self.from_busstop.is_after(base)
         return self.to_busstop.is_after(base)
+
+    @staticmethod
+    def create_emtpy():
+        return Bus(
+            BusIdentifier(""),
+            DepartureTime(""),
+            Busstop.create_empty(),
+            Busstop.create_empty(),
+        )

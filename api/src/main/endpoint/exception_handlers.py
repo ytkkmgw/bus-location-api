@@ -1,3 +1,4 @@
+import traceback
 from typing import Union
 
 from fastapi import FastAPI
@@ -17,10 +18,12 @@ def exception_handlers(app: FastAPI):
     def validation_error_handler(
         request, exception: Union[RequestValidationError, ValidationError]
     ):
+        traceback.print_exception(exception)
         return ErrorResponse(message="不正パラメータ").bad_request()
 
     @app.exception_handler(ResourceNotFoundError)
     def validation_error_handler(request, exception: ResourceNotFoundError):
+        traceback.print_exception(exception)
         return ErrorResponse(message="該当レコードなし").not_found()
 
     @app.exception_handler(Exception)

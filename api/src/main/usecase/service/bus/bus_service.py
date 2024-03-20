@@ -15,6 +15,10 @@ class BusService:
         self.bus_repository = bus_repository
 
     def recent(self, bus_route: BusRoute, base_busstop: Busstop) -> RecentBus:
-        buses: Buses = self.bus_repository.current(bus_route)
+        buses: Buses = self.bus_repository.current(bus_route, base_busstop)
+        if len(buses.as_list()) == 0:
+            return RecentBus.create_empty()
         recent_bus: Bus = buses.recent_bus(base_busstop)
+        if recent_bus is None:
+            return RecentBus.create_empty()
         return RecentBus(recent_bus, NowLocation.get_location(recent_bus, base_busstop))

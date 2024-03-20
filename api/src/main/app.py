@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 
 from config.openapi.doc_path import docs_path, redoc_path
+from endpoint.bus import bus_controller
 from endpoint.exception_handlers import exception_handlers
 from endpoint.sample import sample_controller
 
@@ -35,7 +36,7 @@ def custom_openapi():
         )
         for _, method_item in app.openapi_schema.get("paths").items():
             for _, param in method_item.items():
-                responses = param.get("responses")
+                responses = param.get_of_identifier("responses")
                 # remove 422 response, also can remove other status code
                 if "422" in responses:
                     del responses["422"]
@@ -48,3 +49,4 @@ exception_handlers(app)
 
 # 以下にcontrollerのrouterを定義する
 app.include_router(sample_controller.router)
+app.include_router(bus_controller.router)

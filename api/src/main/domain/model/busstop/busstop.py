@@ -27,7 +27,11 @@ class Busstop(BaseModel):
     def number_subtract(self, other: Busstop) -> int:
         return self.number.__sub__(other.number).value
 
-    def __eq__(self, other_identifier: BusstopIdentifier) -> bool:
+    def __eq__(
+        self, other_identifier: BusstopIdentifier = None, other_name: BusstopName = None
+    ) -> bool:
+        if other_identifier is None:
+            return self.name.__eq__(other_name)
         return self.identifier.__eq__(other_identifier)
 
     @staticmethod

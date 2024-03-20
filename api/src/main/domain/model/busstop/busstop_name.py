@@ -13,3 +13,6 @@ class BusstopName(BaseModel):
 
     def is_停車中(self) -> bool:
         return self.value == ""
+
+    def __eq__(self, other):
+        return self.value == other.value

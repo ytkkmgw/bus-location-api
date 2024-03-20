@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 from domain.model.bus.bus import Bus
 from domain.model.busstop.busstop import Busstop
+from domain.policy.unsupported_operation_error import UnsupportedOperationError
 
 
 class Buses(BaseModel):
@@ -34,3 +35,8 @@ class Buses(BaseModel):
             if bus.is_after(base_busstop):
                 continue
             return bus
+        return None
+
+    @staticmethod
+    def create_empty():
+        return Buses([])

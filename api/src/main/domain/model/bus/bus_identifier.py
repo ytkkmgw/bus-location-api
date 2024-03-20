@@ -7,4 +7,7 @@ class BusIdentifier(BaseModel):
     value: str
 
     def __init__(self, value: str):
+        if value is None:
+            super().__init__(value="")
+            return
         super().__init__(value=value)

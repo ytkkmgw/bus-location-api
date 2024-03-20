@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, model_serializer
 
 
 class Destination(BaseModel):
@@ -8,3 +8,7 @@ class Destination(BaseModel):
 
     def __init__(self, value: str):
         super().__init__(value=value)
+
+    @model_serializer
+    def __str__(self) -> str:
+        return self.value

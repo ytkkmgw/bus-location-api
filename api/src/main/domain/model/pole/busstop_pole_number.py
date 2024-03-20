@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, model_serializer
 
 
 class BusstopPoleNumber(BaseModel):
@@ -8,3 +8,7 @@ class BusstopPoleNumber(BaseModel):
 
     def __init__(self, value: int):
         super().__init__(value=value)
+
+    @model_serializer
+    def __int__(self) -> int:
+        return self.value
