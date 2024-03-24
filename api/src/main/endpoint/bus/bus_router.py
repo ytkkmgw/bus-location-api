@@ -9,7 +9,7 @@ from endpoint.bus.response.busstop_pole_response import BusStopPoleResponse
 from usecase.service.bus.bus_service import BusService
 from usecase.service.pole.pole_service import PoleService
 
-router = fastapi.APIRouter(prefix="/bus", tags=["サンプル"])
+router = fastapi.APIRouter(prefix="/bus", tags=["バス"])
 
 
 @router.get("/")
@@ -33,9 +33,8 @@ def get(
 
 
 @router.get("/check")
-def check_busstio(name: str, pole_service: PoleService = Depends()):
+def check_busstop(name: str, pole_service: PoleService = Depends()):
     busstop_name = BusstopName(name)
     if pole_service.find_by(busstop_name):
-        # raise ResourceNotFoundError("")
         return False
     return True

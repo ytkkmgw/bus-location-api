@@ -3,7 +3,7 @@ from fastapi.openapi.utils import get_openapi
 from starlette.middleware.cors import CORSMiddleware
 
 from config.openapi.doc_path import docs_path, redoc_path
-from endpoint.bus import bus_controller
+from endpoint.bus import bus_router
 from endpoint.exception_handlers import exception_handlers
 
 
@@ -17,12 +17,6 @@ app = FastAPI(
     docs_url=docs_path(),
     redoc_url=redoc_path(),
 )
-
-origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "https://bus-location-web-app.fly.dev",
-]
 
 app.add_middleware(
     CORSMiddleware,
@@ -62,4 +56,4 @@ app.openapi = custom_openapi
 exception_handlers(app)
 
 # 以下にcontrollerのrouterを定義する
-app.include_router(bus_controller.router)
+app.include_router(bus_router.router)
