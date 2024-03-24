@@ -11,3 +11,6 @@ class BusIdentifier(BaseModel):
             super().__init__(value="")
             return
         super().__init__(value=value)
+
+    def is_empty(self) -> bool:
+        return self.value == ""
