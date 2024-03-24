@@ -19,7 +19,6 @@ class PoleDatasource(PoleRepository):
         self.route_service = route_service
 
     def list_all(self, busstop_name: BusstopName) -> BusstopPoles:
-
         query = {"dc:title": busstop_name.value}
         url = OdptAPIEndpoint("https://api.odpt.org/api/v4/odpt:BusstopPole", query)
 
@@ -44,3 +43,10 @@ class PoleDatasource(PoleRepository):
         for value in identifier_list:
             identifiers.append(RouteIdentifier(value))
         return RouteIdentifiers(identifiers)
+
+    def find_by(self, busstop_name: BusstopName) -> bool:
+        query = {"dc:title": busstop_name.value}
+        url = OdptAPIEndpoint("https://api.odpt.org/api/v4/odpt:BusstopPole", query)
+        responses: list[dict] = self.requests.get(url.create()).json()
+        print(responses)
+        return len(responses) == 0

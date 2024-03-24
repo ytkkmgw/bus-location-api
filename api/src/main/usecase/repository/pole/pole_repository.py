@@ -6,5 +6,9 @@ from domain.model.pole.busstop_poles import BusstopPoles
 
 class PoleRepository(ABC):
     @abstractmethod
-    def list_all(self, busstop: BusstopName) -> BusstopPoles:
+    def list_all(self, busstop_name: BusstopName) -> BusstopPoles:
+        pass
+
+    @abstractmethod
+    def find_by(self, busstop_name: BusstopName)->bool:
         pass

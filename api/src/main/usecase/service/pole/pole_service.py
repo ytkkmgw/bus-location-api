@@ -14,3 +14,6 @@ class PoleService:
 
     def list_all(self, busstop_name: BusstopName) -> BusstopPoles:
         return self.pole_repository.list_all(busstop_name)
+
+    def find_by(self, busstop_name: BusstopName) -> bool:
+        return self.pole_repository.find_by(busstop_name)

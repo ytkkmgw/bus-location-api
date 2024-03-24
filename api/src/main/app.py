@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
+from starlette.middleware.cors import CORSMiddleware
 
 from config.openapi.doc_path import docs_path, redoc_path
 from endpoint.bus import bus_controller
@@ -15,6 +16,20 @@ app = FastAPI(
     ],
     docs_url=docs_path(),
     redoc_url=redoc_path(),
+)
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "https://bus-location-web-app.fly.dev",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

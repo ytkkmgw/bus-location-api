@@ -30,3 +30,12 @@ def get(
         busstop_pole_responses.append(BusStopPoleResponse(pole, bus_route_responses))
 
     return BusLocationResponse(busstop_name, busstop_pole_responses)
+
+
+@router.get("/check")
+def check_busstio(name: str, pole_service: PoleService = Depends()):
+    busstop_name = BusstopName(name)
+    if pole_service.find_by(busstop_name):
+        # raise ResourceNotFoundError("")
+        return False
+    return True

@@ -15,11 +15,11 @@ class NowLocation(Enum):
     ONE_TWO = "1つ前〜2つ前間を走行中"
     TWO = "2つ前に停車中"
     TWO_THREE = "2つ前〜3つ前間を走行中"
-    THREE = "3つ前"
+    THREE = "3つ前に停車中"
     THREE_FOUR = "3つ前〜4つ前間を走行中"
-    FOUR = "4つ前"
+    FOUR = "4つ前に停車中"
     FOUR_FIVE = "4つ前〜5つ前間を走行中"
-    FIVE = "5つ前"
+    FIVE = "5つ前に停車中"
     FIVE_BEFORE = "5つ前にも未到着"
 
     @staticmethod
