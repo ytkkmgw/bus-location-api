@@ -13,7 +13,9 @@ class OdptAPIEndpoint:
 
     def _query_parameters(self) -> str:
         query_parameters = "?" + self._consumer_key()
-        query_parameters += "&odpt:operator="+urllib.parse.quote("odpt.Operator:SeibuBus")
+        query_parameters += "&odpt:operator=" + urllib.parse.quote(
+            "odpt.Operator:SeibuBus"
+        )
         for key, value in self.query.items():
             query_parameters += "&" + key + "=" + urllib.parse.quote(value)
 

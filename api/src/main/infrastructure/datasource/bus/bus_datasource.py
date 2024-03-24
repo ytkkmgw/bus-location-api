@@ -34,7 +34,9 @@ class BusDataSource(BusRepository):
                 Bus(
                     bus_identifier,
                     self._get_depature_time(bus_identifier, base_busstop),
-                    self._create_busstop(response.get("odpt:fromBusstopPole"), bus_route),
+                    self._create_busstop(
+                        response.get("odpt:fromBusstopPole"), bus_route
+                    ),
                     self._create_busstop(response["odpt:toBusstopPole"], bus_route),
                 )
             )
@@ -44,7 +46,6 @@ class BusDataSource(BusRepository):
     def _get_depature_time(
         self, bus_identifier: BusIdentifier, base_busstop: Busstop
     ) -> DepartureTime:
-
         query = {"owl:sameAs": bus_identifier.value}
         url = OdptAPIEndpoint("https://api.odpt.org/api/v4/odpt:BusTimetable", query)
 

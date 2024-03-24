@@ -6,9 +6,7 @@ from infrastructure.datasource.route.route_datasource import RouteDatasource
 
 
 class RouteService:
-    def __init__(
-        self, route_repository: RouteDatasource = Depends(RouteDatasource)
-    ):
+    def __init__(self, route_repository: RouteDatasource = Depends(RouteDatasource)):
         self.route_repository = route_repository
 
     def list_all(self, route_identifiers: RouteIdentifiers) -> BusRoutes:

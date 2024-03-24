@@ -10,5 +10,5 @@ class PoleRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by(self, busstop_name: BusstopName)->bool:
+    def find_by(self, busstop_name: BusstopName) -> bool:
         pass

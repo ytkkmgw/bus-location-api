@@ -12,5 +12,5 @@ class DepartureTime(BaseModel):
         super().__init__(value=value)
 
     @model_serializer
-    def __str__(self)->str:
+    def __str__(self) -> str:
         return self.value

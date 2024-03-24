@@ -7,6 +7,5 @@ from domain.model.route.bus_route import BusRoute
 
 class BusRepository(ABC):
     @abstractmethod
-    def current(self, bus_route: BusRoute,base_busstop:Busstop) -> Buses:
+    def current(self, bus_route: BusRoute, base_busstop: Busstop) -> Buses:
         pass
-

@@ -12,7 +12,7 @@ class RouteIdentifiers(BaseModel):
         super().__init__(identifiers=route_identifiers)
 
     def as_str_list(self):
-        result=[]
+        result = []
         for identifier in self.identifiers:
             result.append(identifier.value)
         return result
