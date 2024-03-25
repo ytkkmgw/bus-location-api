@@ -1,6 +1,5 @@
-from fastapi.params import Depends
+from injector import inject
 
-from config.di.inject import inject
 from domain.model.bus.bus import Bus
 from domain.model.bus.buses import Buses
 from domain.model.bus.now_location import NowLocation
@@ -11,7 +10,8 @@ from usecase.repository.bus.bus_repository import BusRepository
 
 
 class BusService:
-    def __init__(self, bus_repository: BusRepository = Depends(inject(BusRepository))):
+    @inject
+    def __init__(self, bus_repository: BusRepository):
         self.bus_repository = bus_repository
 
     def recent(self, bus_route: BusRoute, base_busstop: Busstop) -> RecentBus:

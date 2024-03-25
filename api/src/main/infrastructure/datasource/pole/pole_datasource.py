@@ -1,5 +1,6 @@
 import requests
-from fastapi import Depends
+
+from injector import inject
 
 from config.api.odpt_api_endpoint import OdptAPIEndpoint
 from domain.model.busstop.busstop_name import BusstopName
@@ -10,13 +11,14 @@ from domain.model.pole.busstop_poles import BusstopPoles
 from domain.model.route.route_identifier import RouteIdentifier
 from domain.model.route.route_identifiers import RouteIdentifiers
 from usecase.repository.pole.pole_repository import PoleRepository
-from usecase.service.route.route_serivce import RouteService
+from usecase.repository.route.route_repository import RouteRepository
 
 
 class PoleDatasource(PoleRepository):
-    def __init__(self, route_service: RouteService = Depends(RouteService)):
+    @inject
+    def __init__(self, route_repository: RouteRepository):
         self.requests = requests
-        self.route_service = route_service
+        self.route_repository = route_repository
 
     def list_all(self, busstop_name: BusstopName) -> BusstopPoles:
         query = {"dc:title": busstop_name.value}
@@ -28,7 +30,7 @@ class PoleDatasource(PoleRepository):
             route_identifiers = self._create_busroute_identifier(
                 response["odpt:busroutePattern"]
             )
-            bus_routes = self.route_service.list_all(route_identifiers)
+            bus_routes = self.route_repository.list_all(route_identifiers)
             busstop_pole = BusstopPole(
                 BusstopPoleNumber(response["odpt:busstopPoleNumber"]),
                 BusstopPlatform(response.get("odpt:platformNumber")),

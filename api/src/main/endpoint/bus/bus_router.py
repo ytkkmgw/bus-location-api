@@ -1,6 +1,6 @@
 import fastapi
-from fastapi.params import Depends
 
+from config.di.dependency import Dependency
 from domain.model.busstop.busstop_name import BusstopName
 from domain.model.pole.busstop_poles import BusstopPoles
 from endpoint.bus.response.bus_location_response import BusLocationResponse
@@ -15,16 +15,21 @@ router = fastapi.APIRouter(prefix="/bus", tags=["バス"])
 @router.get("/")
 def get(
     name: str,
-    pole_service: PoleService = Depends(),
-    bus_service: BusService = Depends(),
 ):
     busstop_name = BusstopName(name)
+
+    pole_service = Dependency.get(PoleService)
+
     poles: BusstopPoles = pole_service.list_all(busstop_name)
+
     busstop_pole_responses: list[BusStopPoleResponse] = []
     for pole in poles.as_list():
         bus_route_responses: list[BusRouteResponse] = []
         for busroute in pole.bus_routes.as_list():
             busstop = busroute.busstops.get_of_name(busstop_name)
+
+            bus_service = Dependency.get(BusService)
+
             recent_bus = bus_service.recent(busroute, busstop)
             bus_route_responses.append(BusRouteResponse(busroute, recent_bus))
         busstop_pole_responses.append(BusStopPoleResponse(pole, bus_route_responses))
@@ -33,8 +38,11 @@ def get(
 
 
 @router.get("/check")
-def check_busstop(name: str, pole_service: PoleService = Depends()):
+def check_busstop(name: str):
     busstop_name = BusstopName(name)
+
+    pole_service = Dependency.get(PoleService)
+
     if pole_service.find_by(busstop_name):
         return False
     return True
